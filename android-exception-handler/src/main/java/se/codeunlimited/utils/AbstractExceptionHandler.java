@@ -1,6 +1,7 @@
 package se.codeunlimited.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.DataInputStream;
@@ -34,9 +35,8 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
 
 	/**
 	 * This will be called as soon as the exception has been logged, you must override this to send the stacktraces to your server
-	 * @param ctx
 	 */
-    public abstract void triggerService(Context ctx);
+    public abstract Class<?> getServiceClass();
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
@@ -46,7 +46,7 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
 			
     		Log.d(TAG, "Saving trace: " + stacktrace);
             add(getContext(), stacktrace);
-            triggerService(getContext());
+            getContext().startService(new Intent(getContext(), getServiceClass()));
             
     	}finally{
     		defaultUEH.uncaughtException(t, e);
