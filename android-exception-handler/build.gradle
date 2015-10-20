@@ -23,3 +23,31 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
 }
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'android-exception-handler'
+
+    publishedGroupId = 'se.codeunlimited.utils'
+    libraryName = 'AndroidExceptionHandler'
+    artifact = 'android-exception-handler'
+
+    libraryDescription = 'Tool for overriding the default exception handler in Android and send stacktraces to a backend service'
+
+    siteUrl = 'https://github.com/ptornhult/AndroidExceptionHandler'
+    gitUrl = 'https://github.com/ptornhult/AndroidExceptionHandler.git'
+
+    libraryVersion = '0.1'
+
+    developerId = 'ptornhult'
+    developerName = 'Peter Törnhult'
+    developerEmail = 'ptornhult@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/ptornhult/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/ptornhult/JCenter/master/bintrayv1.gradle'
+
