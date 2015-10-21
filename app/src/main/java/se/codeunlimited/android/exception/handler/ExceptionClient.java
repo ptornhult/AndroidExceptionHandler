@@ -1,4 +1,4 @@
-package se.codeunlimited.utils;
+package se.codeunlimited.android.exception.handler;
 
 import android.os.Build;
 import android.util.Log;
@@ -15,6 +15,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import se.codeunlimited.android.exception.handler.R;
+import se.codeunlimited.utils.IExceptionClient;
+import se.codeunlimited.utils.UnhandledException;
 
 /**
  * Created by Peter on 20-Oct-15.

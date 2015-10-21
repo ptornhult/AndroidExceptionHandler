@@ -1,8 +1,12 @@
-package se.codeunlimited.utils;
+package se.codeunlimited.android.exception.handler;
 
 import android.content.Context;
 
 import java.util.ArrayList;
+
+import se.codeunlimited.utils.AbstractExceptionService;
+import se.codeunlimited.utils.IExceptionClient;
+import se.codeunlimited.utils.UnhandledException;
 
 /**
  * Created by Peter on 20-Oct-15.

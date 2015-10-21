@@ -1,7 +1,9 @@
-package se.codeunlimited.utils;
+package se.codeunlimited.android.exception.handler;
 
 import android.content.Context;
 import android.util.Log;
+
+import se.codeunlimited.utils.AbstractExceptionHandler;
 
 /**
  * Created by Peter on 21-Oct-15.
