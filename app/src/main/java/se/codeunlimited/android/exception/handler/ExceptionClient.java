@@ -16,9 +16,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import se.codeunlimited.android.exception.handler.R;
-import se.codeunlimited.utils.IExceptionClient;
-import se.codeunlimited.utils.UnhandledException;
+import se.codeunlimited.android.exception_handler.IExceptionClient;
+import se.codeunlimited.android.exception_handler.UnhandledException;
 
 /**
  * Created by Peter on 20-Oct-15.

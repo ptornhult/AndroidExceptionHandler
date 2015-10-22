@@ -1,4 +1,4 @@
-package se.codeunlimited.utils;
+package se.codeunlimited.android.exception_handler;
 
 import android.app.Service;
 import android.content.Context;

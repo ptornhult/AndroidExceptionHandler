@@ -4,9 +4,9 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import se.codeunlimited.utils.AbstractExceptionService;
-import se.codeunlimited.utils.IExceptionClient;
-import se.codeunlimited.utils.UnhandledException;
+import se.codeunlimited.android.exception_handler.AbstractExceptionService;
+import se.codeunlimited.android.exception_handler.IExceptionClient;
+import se.codeunlimited.android.exception_handler.UnhandledException;
 
 /**
  * Created by Peter on 20-Oct-15.

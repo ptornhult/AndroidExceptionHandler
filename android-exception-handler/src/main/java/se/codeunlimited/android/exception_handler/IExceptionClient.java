@@ -1,6 +1,4 @@
-package se.codeunlimited.utils;
-
-import org.json.JSONObject;
+package se.codeunlimited.android.exception_handler;
 
 import java.util.ArrayList;
 
