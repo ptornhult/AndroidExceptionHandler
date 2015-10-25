@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 /**
@@ -19,7 +21,7 @@ public abstract class AbstractExceptionService extends Service {
 	 * (Used to load
 	 * @return
 	 */
-	public abstract IExceptionClient getExceptionClient();
+	public abstract AbstractExceptionClient getExceptionClient();
 
     /**
      * Get all exceptions
@@ -68,7 +70,11 @@ public abstract class AbstractExceptionService extends Service {
         ArrayList<UnhandledException> exceptions = getExceptions(this);
 
         if (exceptions.size() > 0) {
-            getExceptionClient().handle(exceptions);
+            try {
+                getExceptionClient().handle(exceptions);
+            } catch (JSONException e) {
+                Log.e(TAG, "Failed to handle exceptions", e);
+            }
             clearExceptions(this);
         }
 

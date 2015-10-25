@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import se.codeunlimited.android.exception_handler.AbstractExceptionService;
-import se.codeunlimited.android.exception_handler.IExceptionClient;
+import se.codeunlimited.android.exception_handler.AbstractExceptionClient;
 import se.codeunlimited.android.exception_handler.UnhandledException;
 
 /**
@@ -16,7 +16,7 @@ public class ExceptionService extends AbstractExceptionService {
     private ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     @Override
-    public IExceptionClient getExceptionClient() {
+    public AbstractExceptionClient getExceptionClient() {
         return exceptionClient;
     }
 

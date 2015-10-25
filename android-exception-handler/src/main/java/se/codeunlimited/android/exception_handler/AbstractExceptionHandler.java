@@ -2,6 +2,7 @@ package se.codeunlimited.android.exception_handler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.DataInputStream;
@@ -110,7 +111,7 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
     private final void add(Context ctx, String stacktrace) {
         try {
         	ArrayList<UnhandledException> list = load(ctx);
-        	list.add(new UnhandledException(getAppCode(ctx), stacktrace));
+        	list.add(new UnhandledException(getAppCode(ctx), ctx.getPackageName(), stacktrace, getDeviceName()));
         	
         	DataOutputStream dos = new DataOutputStream(ctx.openFileOutput(getFileName(), Context.MODE_PRIVATE));
         	
@@ -151,5 +152,30 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
             Log.e(TAG, "Couldn't read application version code", e);
         }
         return -1;
+    }
+
+    private static String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
+    }
+
+    private static String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+
+        if (model==null || manufacturer==null) return "";
+
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
     }
 }
