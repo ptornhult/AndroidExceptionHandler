@@ -42,16 +42,24 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
     @Override
     public void uncaughtException(Thread t, Throwable e) {
     	try{
-			Log.e(TAG, "Caught an unhandled exception", e);
-    		String stacktrace = toString(e);
-			
-    		Log.d(TAG, "Saving trace: " + stacktrace);
-            add(getContext(), stacktrace);
-            getContext().startService(new Intent(getContext(), getServiceClass()));
+            log(e);
             
     	}finally{
     		defaultUEH.uncaughtException(t, e);
     	}
+    }
+
+    /**
+     * Logs the exception and starts the service to send to log-server
+     * @param e
+     */
+    public void log(Throwable e) {
+        Log.e(TAG, "Caught an unhandled exception", e);
+        String stacktrace = toString(e);
+
+        Log.d(TAG, "Saving trace: " + stacktrace);
+        add(getContext(), stacktrace);
+        getContext().startService(new Intent(getContext(), getServiceClass()));
     }
 
 	/**
