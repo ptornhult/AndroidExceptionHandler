@@ -1,11 +1,9 @@
 package se.codeunlimited.android.exception.handler;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 
-import se.codeunlimited.android.exception_handler.AbstractExceptionService;
 import se.codeunlimited.android.exception_handler.AbstractExceptionClient;
+import se.codeunlimited.android.exception_handler.AbstractExceptionService;
 import se.codeunlimited.android.exception_handler.UnhandledException;
 
 /**
@@ -13,7 +11,7 @@ import se.codeunlimited.android.exception_handler.UnhandledException;
  */
 public class ExceptionService extends AbstractExceptionService {
     private ExceptionClient exceptionClient = new ExceptionClient();
-    private ExceptionHandler exceptionHandler = new ExceptionHandler();
+    private ExceptionHandler exceptionHandler = new ExceptionHandler(this);
 
     @Override
     public AbstractExceptionClient getExceptionClient() {
@@ -21,12 +19,12 @@ public class ExceptionService extends AbstractExceptionService {
     }
 
     @Override
-    public ArrayList<UnhandledException> getExceptions(Context ctx) {
-        return exceptionHandler.load(ctx);
+    public ArrayList<UnhandledException> getExceptions() {
+        return exceptionHandler.load();
     }
 
     @Override
-    public void clearExceptions(Context ctx) {
-        exceptionHandler.clear(ctx);
+    public void clearExceptions() {
+        exceptionHandler.clear(this);
     }
 }

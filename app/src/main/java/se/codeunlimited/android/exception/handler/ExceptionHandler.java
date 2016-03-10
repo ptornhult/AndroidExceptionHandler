@@ -11,21 +11,17 @@ import se.codeunlimited.android.exception_handler.AbstractExceptionHandler;
 public class ExceptionHandler extends AbstractExceptionHandler {
     private static final String TAG = "ExceptionHandler";
 
-    public ExceptionHandler() { super(); }
 
-    public static void setup() {
+    public ExceptionHandler(Context ctx) { super(ctx); }
+
+    public static void setup(Context ctx) {
         try {
             if (!(Thread.getDefaultUncaughtExceptionHandler() instanceof AbstractExceptionHandler)) {
-                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
+                Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(ctx));
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to override DefaultUncaughtExceptionHandler", e);
         }
-    }
-
-    @Override
-    public Context getContext() {
-        return App.ctx;
     }
 
     @Override

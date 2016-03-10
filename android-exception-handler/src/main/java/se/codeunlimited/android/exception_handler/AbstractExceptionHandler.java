@@ -16,17 +16,13 @@ import java.util.ArrayList;
 public abstract class AbstractExceptionHandler implements UncaughtExceptionHandler {
 	private static final String TAG = "AExceptionH";
 
-    private UncaughtExceptionHandler defaultUEH;
+    private final Context ctx;
+    private final UncaughtExceptionHandler defaultUEH;
 
-    public AbstractExceptionHandler() {
+    public AbstractExceptionHandler(Context ctx) {
+        this.ctx = ctx;
         this.defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
     }
-
-	/**
-	 * Get the application context
-	 * @return the application context
-	 */
-    public abstract Context getContext();
 
 	/**
 	 * Specify any file name in which stacktraces should be temporarily saved
@@ -58,8 +54,8 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
         String stacktrace = toString(e);
 
         Log.d(TAG, "Saving trace: " + stacktrace);
-        add(getContext(), stacktrace);
-        getContext().startService(new Intent(getContext(), getServiceClass()));
+        add(stacktrace);
+        ctx.startService(new Intent(ctx, getServiceClass()));
     }
 
 	/**
@@ -79,10 +75,9 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
 
 	/**
 	 * Load stacktaces from file
-	 * @param ctx
 	 * @return
 	 */
-    public final ArrayList<UnhandledException> load(Context ctx) {
+    public final ArrayList<UnhandledException> load() {
 		ArrayList<UnhandledException> list = new ArrayList<>();
 		
     	try{
@@ -108,17 +103,16 @@ public abstract class AbstractExceptionHandler implements UncaughtExceptionHandl
 	 * @return
 	 */
     public final boolean hasStoredExceptions(){
-        return load(getContext()).size()>0;
+        return load().size()>0;
     }
 
 	/**
 	 * Add a new stacktrace and persist to file
-	 * @param ctx
 	 * @param stacktrace
 	 */
-    private final void add(Context ctx, String stacktrace) {
+    private final void add(String stacktrace) {
         try {
-        	ArrayList<UnhandledException> list = load(ctx);
+        	ArrayList<UnhandledException> list = load();
         	list.add(new UnhandledException(getAppCode(ctx), ctx.getPackageName(), stacktrace, getDeviceName()));
         	
         	DataOutputStream dos = new DataOutputStream(ctx.openFileOutput(getFileName(), Context.MODE_PRIVATE));
