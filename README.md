@@ -6,6 +6,6 @@ Tool for overriding the default exception handler in Android and send stacktrace
 
 Add the dependency to your gradle build file
 
-    compile 'se.codeunlimited.android.exception_handler:android-exception-handler:0.4'
+    compile 'se.codeunlimited.android.exception_handler:android-exception-handler:0.6'
 
 Then see the app module for example usage
